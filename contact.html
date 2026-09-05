@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start a project with Ronization AI. Send your business context, current lead process, tools, and automation goals for a detailed project review.">
+  <meta name="theme-color" content="#111216">
+  <title>Start a project — Ronization AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#111216;--ink-2:#17191e;--panel:#1c1f25;--panel-2:#22262e;
+      --line:#30343d;--paper:#f0f0ed;--paper-2:#d7d8d4;
+      --muted:#9ca1ac;--muted-2:#707681;--accent:#c8a158;--blue:#7897b5;
+      --max:1180px;--radius:6px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--ink);color:var(--paper);font-family:"IBM Plex Sans",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+    body.menu-open{overflow:hidden}
+    h1,h2,h3{font-family:"Fraunces",serif;font-weight:500;line-height:1.12;margin:0}
+    p{margin:0}
+    a{color:inherit}
+    input,select,textarea,button{font:inherit}
+    button{cursor:pointer}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(17,18,22,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{text-decoration:none;display:flex;align-items:center;gap:10px;font-family:"Fraunces",serif;font-size:20px;font-weight:600;letter-spacing:.01em}
+    .brand-mark{width:10px;height:10px;background:var(--accent);display:block;border-radius:1px}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .nav-right a{color:var(--muted);text-decoration:none;font-size:14px}
+    .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:11px 18px;border-radius:var(--radius);text-decoration:none;border:1px solid transparent;font-weight:600;font-size:14px}
+    .btn-primary{background:var(--accent);color:#181a1f}
+    .btn-primary:hover{background:#d6b167}
+    .btn-ghost{background:transparent;border-color:var(--line);color:var(--paper)}
+    .page{padding:82px 0 110px}
+    .grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:74px;align-items:start}
+    .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:21px}
+    .kicker::before{content:"";width:22px;height:1px;background:var(--accent)}
+    h1{font-size:clamp(40px,5vw,61px);max-width:12ch;letter-spacing:-.02em}
+    .intro{margin-top:22px;color:var(--muted);font-size:16px;max-width:43ch}
+    .notes{margin-top:36px;border-top:1px solid var(--line)}
+    .note{padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--paper-2)}
+    .note span{color:var(--accent);margin-right:8px}
+    form{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:34px}
+    .form-head{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:24px}
+    .form-head h2{font-size:28px}
+    .form-head p{color:var(--muted);font-size:14px;margin-top:8px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .field{margin-bottom:18px}
+    label{display:block;font-size:13px;color:var(--paper-2);margin-bottom:7px}
+    label em{color:var(--muted-2);font-style:normal;font-size:12px}
+    input,select,textarea{
+      width:100%;background:var(--ink);border:1px solid var(--line);color:var(--paper);
+      border-radius:var(--radius);padding:12px 13px;font-size:14px
+    }
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+    textarea{min-height:120px;resize:vertical}
+    .field-note{font-size:11.5px;color:var(--muted-2);margin-top:6px}
+    .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .check{
+      display:flex;align-items:flex-start;gap:9px;padding:10px;border:1px solid var(--line);
+      border-radius:var(--radius);background:var(--ink);color:var(--paper-2);font-size:13px
+    }
+    .check input{width:auto;margin-top:3px}
+    .submit-wrap{margin-top:10px;padding-top:20px;border-top:1px solid var(--line)}
+    .submit-btn{width:100%;border:0}
+    .submit-btn:disabled{opacity:.65;cursor:not-allowed}
+    .status{display:none;margin-top:13px;padding:11px 13px;border:1px solid var(--line);background:var(--ink);color:var(--paper-2);font-size:13px}
+    .status.show{display:block}
+    .status.success{border-color:#566b5a}
+    .status.error{border-color:#6b5555}
+    .micro{margin-top:12px;color:var(--muted-2);font-size:11.5px;line-height:1.5}
+    footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted-2);font-size:12px}
+    footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr;gap:44px}
+      h1{max-width:15ch}
+    }
+    @media (max-width:640px){
+      .wrap{padding:0 20px}
+      .page{padding:58px 0 78px}
+      form{padding:23px}
+      .form-row,.check-grid{grid-template-columns:1fr}
+      .nav-right a:first-child{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap">
+      <a class="brand" href="index.html"><span class="brand-mark"></span>Ronization AI</a>
+      <div class="nav-right">
+        <a href="index.html">Back to site</a>
+        <a class="btn btn-ghost" href="index.html#pricing">View pricing</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="wrap grid">
+      <section>
+        <div class="kicker">Project brief</div>
+        <h1>Tell us what is happening now.</h1>
+        <p class="intro">No call is required. Give us enough context to understand the workflow, the lead problem, and the tools involved. We’ll review it and reply with a practical next step.</p>
+
+        <div class="notes">
+          <div class="note"><span>01</span>More detail is useful; you do not need technical language.</div>
+          <div class="note"><span>02</span>We may recommend not automating part of the process.</div>
+          <div class="note"><span>03</span>Expect a reply by email within one business day.</div>
+        </div>
+      </section>
+
+      <section>
+        <form id="projectForm" data-formsreach>
+          <div class="form-head">
+            <h2>Project details</h2>
+            <p>Required fields are marked with *. Optional fields help us scope the project accurately.</p>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Your name *</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Work email *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="business">Business name *</label>
+              <input id="business" name="business" type="text" required>
+            </div>
+            <div class="field">
+              <label for="website">Website <em>optional</em></label>
+              <input id="website" name="website" type="url" placeholder="https://">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="industry">Industry *</label>
+              <input id="industry" name="industry" type="text" placeholder="e.g. real estate, SaaS, professional services" required>
+            </div>
+            <div class="field">
+              <label for="team">Team size</label>
+              <select id="team" name="team">
+                <option value="">Select</option>
+                <option>Just me</option>
+                <option>2–5</option>
+                <option>6–15</option>
+                <option>16–50</option>
+                <option>51+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="service">What do you want help with? *</label>
+            <select id="service" name="service" required>
+              <option value="">Select one</option>
+              <option>AI chatbot</option>
+              <option>Lead generation system</option>
+              <option>Workflow automation</option>
+              <option>Combination of multiple systems</option>
+              <option>Not sure — diagnose the bottleneck</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Where do your leads or requests currently arrive?</label>
+            <div class="check-grid">
+              <label class="check"><input type="checkbox" name="lead_channels" value="Website">Website</label>
+              <label class="check"><input type="checkbox" name="lead_channels" value="WhatsApp">WhatsApp</label>
+              <label class="check"><input type="checkbox" name="lead_channels" value="Messenger">Messenger</label>
+              <label class="check"><input type="checkbox" name="lead_channels" value="Email">Email</label>
+              <label class="check"><input type="checkbox" name="lead_channels" value="Social DMs">Social DMs</label>
+              <label class="check"><input type="checkbox" name="lead_channels" value="Forms/Ads">Forms / Ads</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="lead_volume">Rough monthly inquiry volume <em>optional</em></label>
+            <select id="lead_volume" name="lead_volume">
+              <option value="">Select</option>
+              <option>Under 20</option>
+              <option>20–50</option>
+              <option>50–100</option>
+              <option>100–300</option>
+              <option>300+</option>
+              <option>I don't know</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="current_process">What happens to a new lead today? *</label>
+            <textarea id="current_process" name="current_process" placeholder="Example: a website inquiry arrives by email, someone copies it into a spreadsheet, then follows up manually." required></textarea>
+            <div class="field-note">Describe the current process from first inquiry to the next step.</div>
+          </div>
+
+          <div class="field">
+            <label for="problem">What is the main problem you want to fix? *</label>
+            <textarea id="problem" name="problem" placeholder="Example: replies are slow, leads are not followed up, staff copy data between systems..." required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="tools">What tools are involved? <em>optional</em></label>
+            <input id="tools" name="tools" type="text" placeholder="e.g. WordPress, HubSpot, Google Sheets, Calendly, WhatsApp">
+          </div>
+
+          <div class="field">
+            <label for="goal">What should happen after automation? *</label>
+            <textarea id="goal" name="goal" placeholder="Describe the ideal result. What should happen automatically?" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="budget">Rough project budget</label>
+              <select id="budget" name="budget">
+                <option value="">Prefer to discuss</option>
+                <option>Under $500</option>
+                <option>$500–$1,000</option>
+                <option>$1,000–$2,000</option>
+                <option>$2,000–$5,000</option>
+                <option>$5,000+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="timeline">Desired timeline</label>
+              <select id="timeline" name="timeline">
+                <option value="">Select</option>
+                <option>As soon as practical</option>
+                <option>Within 2 weeks</option>
+                <option>Within 1 month</option>
+                <option>1–3 months</option>
+                <option>Just exploring</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="anything_else">Anything else we should know? <em>optional</em></label>
+            <textarea id="anything_else" name="anything_else" placeholder="Links, edge cases, constraints, existing workflow notes, or questions."></textarea>
+          </div>
+
+          <input type="hidden" id="source_page" name="source_page" value="contact.html">
+          <input type="hidden" id="referrer" name="referrer" value="">
+          <input type="hidden" id="submitted_at" name="submitted_at" value="">
+
+          <div class="submit-wrap">
+            <button class="btn btn-primary submit-btn" id="submitButton" type="submit">Send project brief →</button>
+            <div class="micro">Your first step is a written review. No call is required.</div>
+            <div class="status" id="formStatus" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Ronization AI</span>
+      <span>farhansadiq.null@gmail.com · Dhaka, Bangladesh</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/@formsreach/js/dist/formsreach.min.js"></script>
+  <script>
+    (function(){
+      const form = document.getElementById("projectForm");
+      const button = document.getElementById("submitButton");
+      const status = document.getElementById("formStatus");
+
+      document.getElementById("referrer").value = document.referrer || "direct";
+      document.getElementById("submitted_at").value = new Date().toISOString();
+
+      const params = new URLSearchParams(window.location.search);
+      const requestedService = params.get("service");
+      if(requestedService){
+        const select = document.getElementById("service");
+        const normalized = requestedService.toLowerCase();
+        Array.from(select.options).forEach(function(option){
+          if(option.textContent.toLowerCase() === normalized) select.value = option.value;
+        });
+      }
+
+      let locked = false;
+
+      function showStatus(message, type){
+        status.textContent = message;
+        status.className = "status show " + (type || "");
+      }
+
+      form.addEventListener("submit", function(event){
+        if(locked){
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return false;
+        }
+
+        if(!form.checkValidity()){
+          return;
+        }
+
+        locked = true;
+        button.disabled = true;
+        button.textContent = "Sending…";
+
+        /* FormsReach handles the actual submission. The lock prevents duplicate
+           submissions from rapid clicks or repeated Enter presses. */
+      }, true);
+    })();
+  </script>
+  <script>
+    FormsReach.init({
+      apiKey: "fr_ecf3ea4219bd02c9ab2d3f2fb18b0a69a4404531343fa89b"
+    });
+  </script>
+</body>
+</html>
